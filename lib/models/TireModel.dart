@@ -18,6 +18,22 @@ class TireModel {
   final double? unitPrice;
   final bool? isNew;
 
+  dynamic getAttribute(String attributeName) {
+    switch (attributeName) {
+      case 'tireSize':
+        return tireSize;
+      case 'loadIndex':
+        return loadIndex;
+      case 'rimDiameter':
+        return rimDiameter;
+      case 'threadPattern':
+        return threadPattern;
+      // Add more cases as needed for other attributes
+      default:
+        throw ArgumentError('Unknown attribute: $attributeName');
+    }
+  }
+
   factory TireModel.fromMap(Map<String, dynamic> json) {
     return TireModel(
         rimDiameter: json['RimDiameter']?.toInt(),

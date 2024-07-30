@@ -49,10 +49,25 @@ class _HomepageState extends State<Homepage> {
   }
 
   List<TireModel> _filterTiresBySize(List<TireModel> tires, String searchTerm) {
-    return tires
-        .where((tire) =>
-            tire.tireSize!.toLowerCase().contains(searchTerm.toLowerCase()))
-        .toList();
+    final List<String> knownAttributes = [
+      'tireSize',
+      'loadIndex',
+      'threadPattern',
+      'rimDiameter'
+    ];
+
+    return tires.where((tire) {
+      for (var attr in knownAttributes) {
+        if (tire
+            .getAttribute(attr)
+            .toString()
+            .toLowerCase()
+            .contains(searchTerm.toLowerCase())) {
+          return true; // Found a match in one of the attributes
+        }
+      }
+      return false; // No match found in any attribute
+    }).toList();
   }
 
   @override
