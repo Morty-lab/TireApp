@@ -1,0 +1,66 @@
+[
+  {
+    "RimDiameter": 12,
+    "TireSize": "155 R 12C",
+    "LoadIndexSpeedSymbol": "88/86R",
+    "TreadPattern": "Linam Van 01 8PR TL",
+    "UnitPriceWVAT": 3851.00,
+    "IsNew": false
+  },
+  {
+    "RimDiameter": 13,
+    "TireSize": "155/70 R 13",
+    "LoadIndexSpeedSymbol": "75T",
+    "TreadPattern": "Sincera SN-832i TL",
+    "UnitPriceWVAT": 3581.00,
+    "IsNew": false
+  },
+  {
+    "RimDiameter": 13,
+    "TireSize": "165 R 13C",
+    "LoadIndexSpeedSymbol": "94R",
+    "TreadPattern": "Linam Van 01 8PR TL",
+    "UnitPriceWVAT": 5426.00,
+    "IsNew": false
+  },
+  {
+    "RimDiameter": 13,
+    "TireSize": "165/65 R 13",
+    "LoadIndexSpeedSymbol": "77T",
+    "TreadPattern": "Sincera SN-828 TL",
+    "UnitPriceWVAT": 3653.00,
+    "IsNew": false
+  },
+  {
+    "RimDiameter": 13,
+    "TireSize": "165/60 R 13",
+    "LoadIndexSpeedSymbol": "73T",
+    "TreadPattern": "Sincera SN-8321 TL",
+    "UnitPriceWVAT": 3842.00,
+    "IsNew": false
+  },
+  {
+    "RimDiameter": 13,
+    "TireSize": "175/70 R 13",
+    "LoadIndexSpeedSymbol": "82T",
+    "TreadPattern": "Sincera SN-832i TL",
+    "UnitPriceWVAT": 3545.00,
+    "IsNew": false
+  },
+  {
+    "RimDiameter": 14,
+    "TireSize": "195 R 14C",
+    "LoadIndexSpeedSymbol": "106/104P",
+    "TreadPattern": "Linam Van 01 8PR TL",
+    "UnitPriceWVAT": 6650.00,
+    "IsNew": true
+  },
+  {
+    "RimDiameter": 15,
+    "TireSize": "195 R 15C",
+    "LoadIndexSpeedSymbol": "106S",
+    "TreadPattern": "Linam Van 01 8PR TL",
+    "UnitPriceWVAT": 7289.00,
+    "IsNew": false
+  }
+]
