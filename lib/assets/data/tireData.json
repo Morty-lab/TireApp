@@ -62,5 +62,381 @@
     "TreadPattern": "Linam Van 01 8PR TL",
     "UnitPriceWVAT": 7289.00,
     "IsNew": false
-  }
+  },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/55 R 20",
+      "LoadIndexSpeedSymbol": "110V",
+      "TreadPattern": "Wildpeak A/T Trail TL",
+      "UnitPriceWVAT": 20537.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/55 R 20",
+      "LoadIndexSpeedSymbol": "110Y",
+      "TreadPattern": "Azenis FK510 SUV TL",
+      "UnitPriceWVAT": 21284.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/50 R 20",
+      "LoadIndexSpeedSymbol": "109H",
+      "TreadPattern": "S/T Z05 TL",
+      "UnitPriceWVAT": 16730.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/50 R 20",
+      "LoadIndexSpeedSymbol": "109V",
+      "TreadPattern": "Wildpeak A/T Trail",
+      "UnitPriceWVAT": 19961.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/50 R 20",
+      "LoadIndexSpeedSymbol": "109Y",
+      "TreadPattern": "Azenis FK510 TL",
+      "UnitPriceWVAT": 19988.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/50 R 20",
+      "LoadIndexSpeedSymbol": "109Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 20807.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/45 R 20",
+      "LoadIndexSpeedSymbol": "105W",
+      "TreadPattern": "Azenis FK510 SUV TL",
+      "UnitPriceWVAT": 20303.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/45 R 20",
+      "LoadIndexSpeedSymbol": "105Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 21149.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/40 R 20",
+      "LoadIndexSpeedSymbol": "101Y",
+      "TreadPattern": "Azenis FK510 TL",
+      "UnitPriceWVAT": 23660.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/40 R 20",
+      "LoadIndexSpeedSymbol": "101Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 24650.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/35 R 20",
+      "LoadIndexSpeedSymbol": "97Y",
+      "TreadPattern": "Azenis FK510 TL",
+      "UnitPriceWVAT": 24212.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/35 R 20",
+      "LoadIndexSpeedSymbol": "97Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 25487.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/30 R 20",
+      "LoadIndexSpeedSymbol": "92Y",
+      "TreadPattern": "Azenis FK510 TL",
+      "UnitPriceWVAT": 25685.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "255/30 R 20",
+      "LoadIndexSpeedSymbol": "92Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 26756.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "LT265/60 R 20",
+      "LoadIndexSpeedSymbol": "121/118S",
+      "TreadPattern": "Wildpeak A/T 3W 10PR TL",
+      "UnitPriceWVAT": 23057.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "265/50 R 20",
+      "LoadIndexSpeedSymbol": "111H",
+      "TreadPattern": "S/T Z05 TL",
+      "UnitPriceWVAT": 13184.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "265/50 R 20",
+      "LoadIndexSpeedSymbol": "111V",
+      "TreadPattern": "Wildpeak A/T Trail TL",
+      "UnitPriceWVAT": 16154.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "265/45 R 20",
+      "LoadIndexSpeedSymbol": "108Y",
+      "TreadPattern": "Azenis FK510 SUV TL",
+      "UnitPriceWVAT": 21977.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "265/45 R 20",
+      "LoadIndexSpeedSymbol": "108Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 22886.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "265/35 R 20",
+      "LoadIndexSpeedSymbol": "99Y",
+      "TreadPattern": "Azenis FK510 TL",
+      "UnitPriceWVAT": 26765.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "265/30 R 20",
+      "LoadIndexSpeedSymbol": "94Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 27080.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "275/60 R 20",
+      "LoadIndexSpeedSymbol": "115H",
+      "TreadPattern": "S/T Z05 TL",
+      "UnitPriceWVAT": 21437.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "275/60 R 20",
+      "LoadIndexSpeedSymbol": "115T",
+      "TreadPattern": "Wildpeak A/T 3W TL",
+      "UnitPriceWVAT": 22382.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "275/55 R 20",
+      "LoadIndexSpeedSymbol": "117H",
+      "TreadPattern": "S/T Z05 TL",
+      "UnitPriceWVAT": 19178.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "275/55 R 20",
+      "LoadIndexSpeedSymbol": "117T",
+      "TreadPattern": "Wildpeak A/T 3W TL",
+      "UnitPriceWVAT": 20690.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "275/50 R 20",
+      "LoadIndexSpeedSymbol": "113Y",
+      "TreadPattern": "Azenis FK510 SUV TL",
+      "UnitPriceWVAT": 21941.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "275/45 R 20",
+      "LoadIndexSpeedSymbol": "110W",
+      "TreadPattern": "Azenis FK510 SUV TL",
+      "UnitPriceWVAT": 24074.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "275/40 R 20",
+      "LoadIndexSpeedSymbol": "106Y",
+      "TreadPattern": "Azenis FK510 SUV TL",
+      "UnitPriceWVAT": 27386.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "275/40 R 20",
+      "LoadIndexSpeedSymbol": "106Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 28520.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "275/35 R 20",
+      "LoadIndexSpeedSymbol": "102Y",
+      "TreadPattern": "Azenis FK510 TL",
+      "UnitPriceWVAT": 26972.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "275/35 R 20",
+      "LoadIndexSpeedSymbol": "102Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 28097.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "275/30 R 20",
+      "LoadIndexSpeedSymbol": "97Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 28376.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "LT285/60 R 20",
+      "LoadIndexSpeedSymbol": "125/122R",
+      "TreadPattern": "Wildpeak A/T 3W TL",
+      "UnitPriceWVAT": 27197.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "LT285/55 R 20",
+      "LoadIndexSpeedSymbol": "122/119T",
+      "TreadPattern": "Wildpeak A/T 3W 10PR TL",
+      "UnitPriceWVAT": 24497.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "285/50 R 20",
+      "LoadIndexSpeedSymbol": "112V",
+      "TreadPattern": "Wildpeak H/T 01 TL",
+      "UnitPriceWVAT": 20276.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "285/35 R 20",
+      "LoadIndexSpeedSymbol": "104Y",
+      "TreadPattern": "Azenis FK510 TL",
+      "UnitPriceWVAT": 28313.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "285/35 R 20",
+      "LoadIndexSpeedSymbol": "104Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 29492.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "285/30 R 20",
+      "LoadIndexSpeedSymbol": "99Y",
+      "TreadPattern": "Azenis FK510 TL",
+      "UnitPriceWVAT": 29744.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "285/30 R 20",
+      "LoadIndexSpeedSymbol": "99Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 30977.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "295/45 R 20",
+      "LoadIndexSpeedSymbol": "114H",
+      "TreadPattern": "S/T Z05 TL",
+      "UnitPriceWVAT": 24713.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "295/40 R 20",
+      "LoadIndexSpeedSymbol": "110Y",
+      "TreadPattern": "Azenis FK510 SUV TL",
+      "UnitPriceWVAT": 26243.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "295/30 R 20",
+      "LoadIndexSpeedSymbol": "101Y",
+      "TreadPattern": "Azenis FK510 TL",
+      "UnitPriceWVAT": 31841.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "LT305/55 R 20",
+      "LoadIndexSpeedSymbol": "121/118S",
+      "TreadPattern": "Wildpeak A/T 3W 10PR TL",
+      "UnitPriceWVAT": 27215.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "LT305/55 R 20",
+      "LoadIndexSpeedSymbol": "121/118Q",
+      "TreadPattern": "Wildpeak M/T 01 10PR TL",
+      "UnitPriceWVAT": 27288.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "315/35 ZR 20",
+      "LoadIndexSpeedSymbol": "110Y",
+      "TreadPattern": "Azenis FK520L TL",
+      "UnitPriceWVAT": 34325.00,
+      "IsNew": false
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "LT325/60 R 20",
+      "LoadIndexSpeedSymbol": "126/123S",
+      "TreadPattern": "Wildpeak A/T 3W 10PR TL",
+      "UnitPriceWVAT": 29006.00,
+      "IsNew": true
+    },
+    {
+      "RimDiameter": 20,
+      "TireSize": "33 x 12.50 R 20",
+      "LoadIndexSpeedSymbol": "114Q",
+      "TreadPattern": "Wildpeak M/T 01 10PR TL",
+      "UnitPriceWVAT": 28295.00,
+      "IsNew": false
+    }
 ]

@@ -14,32 +14,57 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  late Future<List<TireModel>> _tiresFuture;
-  late Future<List<int?>> rimDiameters;
   final TextEditingController _search = TextEditingController();
   bool _showSearchBar = false;
   int? selectedRimDiameter = 0;
   String item = "";
+  int maxItems = 10;
+  List<TireModel> _tires = [];
+  bool _isLoadingMore = false;
+  bool _hasMoreData = true;
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    _tiresFuture = _loadTires();
-    rimDiameters = _loadRimSize();
+    _scrollController.addListener(_onScroll);
+    _loadTires(maxItems);
   }
 
-  Future<List<TireModel>> _loadTires() async {
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+            _scrollController.position.maxScrollExtent &&
+        !_isLoadingMore &&
+        _hasMoreData) {
+      // User has scrolled to the bottom, load more items
+      setState(() {
+        _isLoadingMore = true;
+        maxItems += 10;
+      });
+      _loadTires(10);
+    }
+  }
+
+  Future<void> _loadTires(int limit) async {
     try {
-      // Attempt to load the JSON file
       final jsonString =
           await rootBundle.loadString('lib/assets/data/tireData.json');
-      // Decode the JSON file
       final List<dynamic> jsonData = jsonDecode(jsonString);
-      // Map each item in the list to a TireModel instance
-      final List<TireModel> tires =
-          jsonData.map((item) => TireModel.fromMap(item)).toList();
 
-      return tires;
+      if (_tires.length + limit >= jsonData.length) {
+        limit = jsonData.length - _tires.length;
+        _hasMoreData = false;
+      }
+
+      final List<TireModel> newTires = [];
+      for (int i = _tires.length; i < _tires.length + limit; i++) {
+        newTires.add(TireModel.fromMap(jsonData[i]));
+      }
+
+      setState(() {
+        _tires.addAll(newTires);
+        _isLoadingMore = false;
+      });
     } catch (e) {
       print('Error loading tires data: $e');
       throw Exception('Failed to load tire data. Asset may not exist.');
@@ -48,12 +73,14 @@ class _HomepageState extends State<Homepage> {
 
   Future<List<int?>> _loadRimSize() async {
     try {
-      final json = await _loadTires();
-      // Convert the mapped list to a Set to remove duplicates
-      final Set<int?> uniqueRimDiameters =
-          json.map((item) => item.rimDiameter).toSet();
+      final jsonString =
+          await rootBundle.loadString('lib/assets/data/tireData.json');
+      final List<dynamic> jsonData = jsonDecode(jsonString);
+      final List<TireModel> tires =
+          jsonData.map((data) => TireModel.fromMap(data)).toList();
 
-      // Convert the Set back to a List if necessary and prepend null for "All"
+      final Set<int?> uniqueRimDiameters =
+          tires.map((item) => item.rimDiameter).toSet();
       final List<int?> rimDiameter = [0, ...uniqueRimDiameters.toList()];
 
       return rimDiameter;
@@ -71,15 +98,13 @@ class _HomepageState extends State<Homepage> {
 
   List<TireModel> _filterTiresBySize(
       List<TireModel> tires, String searchTerm, int? selectedRimDiameter) {
-    // If selectedRimDiameter is null, return all tires filtered by searchTerm
     if (selectedRimDiameter == 0) {
       return tires.where((tire) {
         final List<String> knownAttributes = [
           'tireSize',
           'loadIndex',
-          'threadPattern',
+          'threadPattern'
         ];
-
         for (var attr in knownAttributes) {
           if (tire
               .getAttribute(attr)
@@ -92,14 +117,12 @@ class _HomepageState extends State<Homepage> {
         return false;
       }).toList();
     } else {
-      // Filter tires by both searchTerm and selectedRimDiameter
       return tires.where((tire) {
         final List<String> knownAttributes = [
           'tireSize',
           'loadIndex',
-          'threadPattern',
+          'threadPattern'
         ];
-
         for (var attr in knownAttributes) {
           if (tire
               .getAttribute(attr)
@@ -115,12 +138,6 @@ class _HomepageState extends State<Homepage> {
           }
         }
         return false;
-        // return tire.rimDiameter == selectedRimDiameter &&
-        //     tire
-        //         .getAttribute('tireSize')
-        //         .toString()
-        //         .toLowerCase()
-        //         .contains(searchTerm.toLowerCase());
       }).toList();
     }
   }
@@ -150,34 +167,19 @@ class _HomepageState extends State<Homepage> {
             : const Text("Tire Catalog"),
         actions: <Widget>[
           FutureBuilder<List<int?>>(
-            future:
-                rimDiameters, // Assuming this is already initialized somewhere in your code
+            future: _loadRimSize(),
             builder:
                 (BuildContext context, AsyncSnapshot<List<int?>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator(); // Show loading indicator while waiting
+                return CircularProgressIndicator();
               } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}'); // Handle error case
+                return Text('Error: ${snapshot.error}');
               } else {
-                // Build DropdownButton with items from the snapshot.data
                 return Container(
-                  // Example properties for the Container
-                  padding:
-                      EdgeInsets.all(8.0), // Adds padding inside the container
-                  margin: EdgeInsets.symmetric(
-                      horizontal:
-                          20.0), // Adds horizontal margins outside the container
-                  // decoration: BoxDecoration(
-                  //   border: Border.all(
-                  //       color:
-                  //           Colors.grey), // Adds a border around the container
-                  //   borderRadius: BorderRadius.circular(
-                  //       5.0), // Makes the border corners rounded
-                  // ),
-
+                  padding: EdgeInsets.all(8.0),
+                  margin: EdgeInsets.symmetric(horizontal: 20.0),
                   child: DropdownButton<int?>(
-                    value:
-                        selectedRimDiameter, // Make sure this is defined in your state
+                    value: selectedRimDiameter,
                     onChanged: (int? newValue) {
                       setState(() {
                         selectedRimDiameter = newValue;
@@ -205,30 +207,30 @@ class _HomepageState extends State<Homepage> {
           ),
         ],
       ),
-      body: FutureBuilder<List<TireModel>>(
-        future: _tiresFuture.then(
-            (tires) => _filterTiresBySize(tires, item, selectedRimDiameter)),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            print('Error loading tires: ${snapshot.error}');
-            return Center(child: Text('Error loading tires'));
-          } else {
-            // Create a GridView with the tire data
-            return GridView.builder(
-              itemCount: snapshot.data!.length,
+      body: Column(
+        children: [
+          Expanded(
+            child: GridView.builder(
+              controller: _scrollController,
+              itemCount:
+                  _filterTiresBySize(_tires, item, selectedRimDiameter).length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // Adjust based on your UI needs
-                childAspectRatio: 2 / 3, // Adjust based on your UI needs
+                crossAxisCount: 2,
+                childAspectRatio: 2 / 3,
               ),
               itemBuilder: (context, index) {
-                final tire = snapshot.data![index];
+                final tire = _filterTiresBySize(
+                    _tires, item, selectedRimDiameter)[index];
                 return TireCard(tire: tire);
               },
-            );
-          }
-        },
+            ),
+          ),
+          if (_isLoadingMore)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircularProgressIndicator(),
+            ),
+        ],
       ),
     );
   }

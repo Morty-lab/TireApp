@@ -16,7 +16,7 @@ class _CardState extends State<TireCard> {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0)), // Rounded corners
       elevation: 5.0, // Shadow effect
-      margin: EdgeInsets.all(10.0), // Margin around the card
+      margin: EdgeInsets.all(7), // Margin around the card
       child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
