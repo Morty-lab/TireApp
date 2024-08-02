@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/components/Card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,14 +15,17 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   late Future<List<TireModel>> _tiresFuture;
+  late Future<List<int?>> rimDiameters;
   final TextEditingController _search = TextEditingController();
-  bool _showSearchBar = true;
+  bool _showSearchBar = false;
+  int? selectedRimDiameter = 0;
   String item = "";
 
   @override
   void initState() {
     super.initState();
     _tiresFuture = _loadTires();
+    rimDiameters = _loadRimSize();
   }
 
   Future<List<TireModel>> _loadTires() async {
@@ -42,32 +46,83 @@ class _HomepageState extends State<Homepage> {
     }
   }
 
+  Future<List<int?>> _loadRimSize() async {
+    try {
+      final json = await _loadTires();
+      // Convert the mapped list to a Set to remove duplicates
+      final Set<int?> uniqueRimDiameters =
+          json.map((item) => item.rimDiameter).toSet();
+
+      // Convert the Set back to a List if necessary and prepend null for "All"
+      final List<int?> rimDiameter = [0, ...uniqueRimDiameters.toList()];
+
+      return rimDiameter;
+    } catch (e) {
+      print('Error loading rimDiameter data: $e');
+      throw Exception('Failed to load tire data. Asset may not exist.');
+    }
+  }
+
   void _onSearch(String text) {
     setState(() {
       item = text;
     });
   }
 
-  List<TireModel> _filterTiresBySize(List<TireModel> tires, String searchTerm) {
-    final List<String> knownAttributes = [
-      'tireSize',
-      'loadIndex',
-      'threadPattern',
-      'rimDiameter'
-    ];
+  List<TireModel> _filterTiresBySize(
+      List<TireModel> tires, String searchTerm, int? selectedRimDiameter) {
+    // If selectedRimDiameter is null, return all tires filtered by searchTerm
+    if (selectedRimDiameter == 0) {
+      return tires.where((tire) {
+        final List<String> knownAttributes = [
+          'tireSize',
+          'loadIndex',
+          'threadPattern',
+        ];
 
-    return tires.where((tire) {
-      for (var attr in knownAttributes) {
-        if (tire
-            .getAttribute(attr)
-            .toString()
-            .toLowerCase()
-            .contains(searchTerm.toLowerCase())) {
-          return true; // Found a match in one of the attributes
+        for (var attr in knownAttributes) {
+          if (tire
+              .getAttribute(attr)
+              .toString()
+              .toLowerCase()
+              .contains(searchTerm.toLowerCase())) {
+            return true;
+          }
         }
-      }
-      return false; // No match found in any attribute
-    }).toList();
+        return false;
+      }).toList();
+    } else {
+      // Filter tires by both searchTerm and selectedRimDiameter
+      return tires.where((tire) {
+        final List<String> knownAttributes = [
+          'tireSize',
+          'loadIndex',
+          'threadPattern',
+        ];
+
+        for (var attr in knownAttributes) {
+          if (tire
+              .getAttribute(attr)
+              .toString()
+              .toLowerCase()
+              .contains(searchTerm.toLowerCase())) {
+            return tire.rimDiameter == selectedRimDiameter &&
+                tire
+                    .getAttribute(attr)
+                    .toString()
+                    .toLowerCase()
+                    .contains(searchTerm.toLowerCase());
+          }
+        }
+        return false;
+        // return tire.rimDiameter == selectedRimDiameter &&
+        //     tire
+        //         .getAttribute('tireSize')
+        //         .toString()
+        //         .toLowerCase()
+        //         .contains(searchTerm.toLowerCase());
+      }).toList();
+    }
   }
 
   @override
@@ -94,6 +149,52 @@ class _HomepageState extends State<Homepage> {
               )
             : const Text("Tire Catalog"),
         actions: <Widget>[
+          FutureBuilder<List<int?>>(
+            future:
+                rimDiameters, // Assuming this is already initialized somewhere in your code
+            builder:
+                (BuildContext context, AsyncSnapshot<List<int?>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator(); // Show loading indicator while waiting
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}'); // Handle error case
+              } else {
+                // Build DropdownButton with items from the snapshot.data
+                return Container(
+                  // Example properties for the Container
+                  padding:
+                      EdgeInsets.all(8.0), // Adds padding inside the container
+                  margin: EdgeInsets.symmetric(
+                      horizontal:
+                          20.0), // Adds horizontal margins outside the container
+                  // decoration: BoxDecoration(
+                  //   border: Border.all(
+                  //       color:
+                  //           Colors.grey), // Adds a border around the container
+                  //   borderRadius: BorderRadius.circular(
+                  //       5.0), // Makes the border corners rounded
+                  // ),
+
+                  child: DropdownButton<int?>(
+                    value:
+                        selectedRimDiameter, // Make sure this is defined in your state
+                    onChanged: (int? newValue) {
+                      setState(() {
+                        selectedRimDiameter = newValue;
+                      });
+                    },
+                    items: snapshot.data!.map((int? item) {
+                      String displayText = item == 0 ? "All" : item.toString();
+                      return DropdownMenuItem<int?>(
+                        child: Text(displayText),
+                        value: item,
+                      );
+                    }).toList(),
+                  ),
+                );
+              }
+            },
+          ),
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
@@ -105,7 +206,8 @@ class _HomepageState extends State<Homepage> {
         ],
       ),
       body: FutureBuilder<List<TireModel>>(
-        future: _tiresFuture.then((tires) => _filterTiresBySize(tires, item)),
+        future: _tiresFuture.then(
+            (tires) => _filterTiresBySize(tires, item, selectedRimDiameter)),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -122,55 +224,7 @@ class _HomepageState extends State<Homepage> {
               ),
               itemBuilder: (context, index) {
                 final tire = snapshot.data![index];
-                return Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(15.0)), // Rounded corners
-                  elevation: 5.0, // Shadow effect
-                  margin: EdgeInsets.all(10.0), // Margin around the card
-                  child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'lib/assets/images/defaultTireImage.png',
-                          height: 69,
-                          fit: BoxFit.cover,
-                        ), // Display image at the top
-                        SizedBox(height: 10.0), // Space between image and text
-                        Text(tire.tireSize ?? '',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold)), // Bold tire size
-                        SizedBox(height: 5.0), // Small space between texts
-                        Text(tire.loadIndex ?? '',
-                            style: TextStyle(
-                                color: Colors
-                                    .grey[700])), // Load index with grey color
-                        Text(tire.threadPattern ?? '',
-                            style: TextStyle(
-                                color: Colors.grey[
-                                    700])), // Thread pattern with grey color
-                        SizedBox(height: 5.0), // Small space before price
-                        Text('\$${tire.unitPrice.toString()}',
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors
-                                    .blueAccent)), // Highlighted unit price
-                        SizedBox(height: 10.0), // Space before chip
-                        if (tire.isNew != false)
-                          Chip(
-                            label: Text(
-                              'New',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            backgroundColor: Colors.green,
-                          ),
-                      ],
-                    ),
-                  ),
-                );
+                return TireCard(tire: tire);
               },
             );
           }
