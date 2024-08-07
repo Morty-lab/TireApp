@@ -40,6 +40,25 @@ class _OnboardingState extends State<Onboarding> {
                     final item = widget.pages[idx];
                     return Column(
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                  style: TextButton.styleFrom(
+                                      visualDensity: VisualDensity.comfortable,
+                                      foregroundColor: Colors.white,
+                                      textStyle: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold)),
+                                  onPressed: () {
+                                    widget.onSkip?.call();
+                                  },
+                                  child: const Text("Skip")),
+                            ],
+                          ),
+                        ),
                         Expanded(
                           flex: 3,
                           child: Padding(
@@ -115,9 +134,14 @@ class _OnboardingState extends State<Onboarding> {
                             textStyle: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold)),
                         onPressed: () {
-                          widget.onSkip?.call();
+                          //widget.onSkip?.call();
+                          if (_currentPage != 0) {
+                            _pageController.animateToPage(_currentPage - 1,
+                                curve: Curves.easeInOutCubic,
+                                duration: const Duration(milliseconds: 250));
+                          }
                         },
-                        child: const Text("Skip")),
+                        child: Text(_currentPage == 0 ? " " : "previous")),
                     TextButton(
                       style: TextButton.styleFrom(
                           visualDensity: VisualDensity.comfortable,
