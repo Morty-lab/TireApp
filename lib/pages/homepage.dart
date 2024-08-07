@@ -182,7 +182,11 @@ class _HomepageState extends State<Homepage> {
             builder:
                 (BuildContext context, AsyncSnapshot<List<int?>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  )
+                );
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else {
@@ -200,9 +204,8 @@ class _HomepageState extends State<Homepage> {
                       String displayText = item == 0 ? "All" : item.toString();
                       return DropdownMenuItem<int?>(
                         value: item,
-                        child: Text(displayText, style: const TextStyle(
-                          backgroundColor: Color(0xFFE60012),
-                          color: Colors.white
+                        child: Text(displayText, style: TextStyle(
+                          color: selectedRimDiameter == item ? Colors.white : const Color(0xFFE60012)
                         ),),
                       );
                     }).toList(),
