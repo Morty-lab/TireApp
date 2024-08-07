@@ -1,6 +1,9 @@
 import 'package:app/pages/homepage.dart';
 import 'package:app/pages/landing.dart';
 import 'package:app/pages/onBoarding.dart';
+import 'package:app/pages/tire.dart';
+import 'package:app/themes/theme.dart';
+import 'package:app/widgets/fade_animation.dart';
 import 'package:flutter/material.dart';
 
 import 'models/OnboardingModel.dart';
@@ -16,37 +19,38 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: appTheme,
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/': (context) => Onboarding(
               pages: [
                 OnBoardingModel(
-                  title: 'Fast, Fluid and Secure',
+                  title: 'Welcome to Tire Shop',
                   description:
-                      'Enjoy the best of the world in the palm of your hands.',
-                  imageUrl: 'lib/assets/images/car.png',
-                  bgColor: const Color(0xFF11bfb0),
+                      'Your one-stop solution for all your tire needs. Get ready for a smooth ride!',
+                  imageUrl: 'lib/assets/images/car-1.png',
+                  bgColor: const Color(0xffc24b23),
                 ),
                 OnBoardingModel(
-                  title: 'Quality Tires',
-                  description: 'Connect with your friends anytime anywhere.',
-                  imageUrl: 'lib/assets/images/tire.png',
-                  bgColor: const Color(0xFFBF1120),
+                  title: 'Explore Our Wide Range',
+                  description: 'Browse through a variety of tire brands and types suitable for your vehicle.',
+                  imageUrl: 'lib/assets/images/tire-1.png',
+                  bgColor: const Color(0xffc26023),
                 ),
                 OnBoardingModel(
-                  title: 'Bookmark your favourites',
+                  title: 'Schedule Services Easily',
                   description:
-                      'Bookmark your favourite quotes to read at a leisure time.',
-                  imageUrl: 'lib/assets/images/car.png',
-                  bgColor: const Color(0xFF1120bf),
+                      'Book tire installation, balancing, and other services right from the app.',
+                  imageUrl: 'lib/assets/images/tire-2.png',
+                  bgColor: const Color(0xffc24b23),
                 ),
                 OnBoardingModel(
-                  title: 'Follow creators',
+                  title: 'Ready to Roll?',
                   description:
-                      'Follow your favourite creators to stay in the loop.',
-                  imageUrl: 'lib/assets/images/car.png',
-                  bgColor: const Color(0xFFbf5911),
+                      "Let's get started! Your smooth ride is just a few taps away.",
+                  imageUrl: 'lib/assets/images/car-2.png',
+                  bgColor: const Color(0xffc2a223),
                 ),
               ],
               onSkip: () {

@@ -1,6 +1,7 @@
 import 'package:app/models/TireModel.dart';
 import 'package:flutter/material.dart';
 
+
 class TireCard extends StatefulWidget {
   final TireModel tire;
   const TireCard({super.key, required this.tire});
@@ -57,6 +58,5 @@ class _CardState extends State<TireCard> {
         ),
       ),
     );
-    ;
   }
 }

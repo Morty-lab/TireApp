@@ -1,7 +1,8 @@
 import 'dart:convert';
-
+import 'dart:math';
 import 'package:app/components/Card.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:app/pages/tire.dart';
+import 'package:app/widgets/fade_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/TireModel.dart';
@@ -23,6 +24,15 @@ class _HomepageState extends State<Homepage> {
   bool _isLoadingMore = false;
   bool _hasMoreData = true;
   ScrollController _scrollController = ScrollController();
+
+
+  List<String> tires = ['ct-1.jpg', 'ct-2.jpg', 'ct-3.png', 'ct-4.png', 'ct-5.png', 'ct-3.png'];
+
+  String getRandomTire() {
+    final random = Random();
+    int index = random.nextInt(tires.length);
+    return 'lib/assets/images/${tires[index]}';
+  }
 
   @override
   void initState() {
@@ -146,6 +156,7 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xFFE60012),
         title: _showSearchBar
             ? Container(
                 height: 40,
@@ -158,7 +169,7 @@ class _HomepageState extends State<Homepage> {
                   decoration: const InputDecoration(
                       contentPadding: EdgeInsets.fromLTRB(16, 20, 16, 12),
                       hintStyle: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                       border: InputBorder.none,
                       hintText: "Search.."),
@@ -171,13 +182,13 @@ class _HomepageState extends State<Homepage> {
             builder:
                 (BuildContext context, AsyncSnapshot<List<int?>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else {
                 return Container(
-                  padding: EdgeInsets.all(8.0),
-                  margin: EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.all(8.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: DropdownButton<int?>(
                     value: selectedRimDiameter,
                     onChanged: (int? newValue) {
@@ -188,8 +199,11 @@ class _HomepageState extends State<Homepage> {
                     items: snapshot.data!.map((int? item) {
                       String displayText = item == 0 ? "All" : item.toString();
                       return DropdownMenuItem<int?>(
-                        child: Text(displayText),
                         value: item,
+                        child: Text(displayText, style: const TextStyle(
+                          backgroundColor: Color(0xFFE60012),
+                          color: Colors.white
+                        ),),
                       );
                     }).toList(),
                   ),
@@ -198,7 +212,7 @@ class _HomepageState extends State<Homepage> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
               setState(() {
                 _showSearchBar = !_showSearchBar;
@@ -210,27 +224,112 @@ class _HomepageState extends State<Homepage> {
       body: Column(
         children: [
           Expanded(
-            child: GridView.builder(
+            // child: GridView.builder(
+            //   controller: _scrollController,
+            //   itemCount:
+            //       _filterTiresBySize(_tires, item, selectedRimDiameter).length,
+            //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            //     crossAxisCount: 2,
+            //     childAspectRatio: 2 / 3,
+            //   ),
+            //   itemBuilder: (context, index) {
+            //     final tire = _filterTiresBySize(
+            //         _tires, item, selectedRimDiameter)[index];
+            //     return TireCard(tire: tire);
+            //   },
+            // ),
+            child: ListView.builder(
               controller: _scrollController,
-              itemCount:
-                  _filterTiresBySize(_tires, item, selectedRimDiameter).length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 2 / 3,
-              ),
+                itemCount:
+                _filterTiresBySize(_tires, item, selectedRimDiameter).length,
               itemBuilder: (context, index) {
-                final tire = _filterTiresBySize(
+                final tireItem = _filterTiresBySize(
                     _tires, item, selectedRimDiameter)[index];
-                return TireCard(tire: tire);
-              },
+                // return TireCard(tire: tire);
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 2.0),
+                  child: FadeAnimation(0.7 + (index * 0.1), makeItem(
+                    image:  getRandomTire(),
+                    tag: 'blue',
+                    context: context,
+                    tire: tireItem
+                  )),
+                );
+              }
             ),
           ),
           if (_isLoadingMore)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: CircularProgressIndicator(),
             ),
         ],
+      ),
+    );
+  }
+
+  Widget makeItem({image, tag, context, required TireModel tire}) {
+    return Hero(
+      tag: tire.tireSize!,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Tire(image: image, tire: tire,)));
+        },
+        child: Container(
+          height: 250,
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.only(bottom: 20),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                  image: AssetImage(image),
+                  fit: BoxFit.cover
+              ),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey[400]!,
+                    blurRadius: 10,
+                    offset: const Offset(0, 10)
+                )
+              ]
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        FadeAnimation(1, Text(tire.tireSize!, style: const TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),)),
+                        const SizedBox(height: 10,),
+                        FadeAnimation(1.1, Text(tire.loadIndex!, style: const TextStyle(color: Colors.white, fontSize: 20),)),
+                        const SizedBox(height: 10,),
+                        FadeAnimation(1.1, Text(tire.threadPattern!, style: const TextStyle(color: Colors.white, fontSize: 20),)),
+                      ],
+                    ),
+                  ),
+                  FadeAnimation(1.2, Container(
+                    width: 35,
+                    height: 35,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white
+                    ),
+                    child: const Center(
+                      child: Icon(Icons.favorite_border, size: 20,),
+                    ),
+                  ))
+                ],
+              ),
+              FadeAnimation(1.2, Text('₱ ${tire.unitPrice!.toString()}', style: const TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),)),
+            ],
+          ),
+        ),
       ),
     );
   }

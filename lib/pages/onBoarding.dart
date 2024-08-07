@@ -32,7 +32,6 @@ class _OnboardingState extends State<Onboarding> {
                   controller: _pageController,
                   itemCount: widget.pages.length,
                   onPageChanged: (idx) {
-                    // Change current page when pageview changes
                     setState(() {
                       _currentPage = idx;
                     });
@@ -66,7 +65,7 @@ class _OnboardingState extends State<Onboarding> {
                               ),
                               Container(
                                 constraints:
-                                    const BoxConstraints(maxWidth: 280),
+                                    const BoxConstraints(maxWidth: 320),
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 24.0, vertical: 8.0),
                                 child: Text(item.description,

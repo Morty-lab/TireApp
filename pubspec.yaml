@@ -35,6 +35,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  simple_animations: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +63,7 @@ flutter:
   assets:
      - lib/assets/data/tireData.json
      - lib/assets/images/defaultTireImage.png
+     - lib/assets/images/
 #     - lib/assets/images/tire.png
   #   - images/a_dot_ham.jpeg
 
@@ -76,6 +78,19 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Satoshi
+      fonts:
+        - asset: lib/assets/fonts/Satoshi-Regular.ttf
+          weight: 400
+        - asset: lib/assets/fonts/Satoshi-Medium.ttf
+          weight: 500
+        - asset: lib/assets/fonts/Satoshi-Black.ttf
+          weight: 900
+        - asset: lib/assets/fonts/Satoshi-Bold.ttf
+          weight: 700
+        - asset: lib/assets/fonts/Satoshi-Light.ttf
+          weight: 300
   # fonts:
   #   - family: Schyler
   #     fonts:
